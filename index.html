@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DropCraving</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .titulo-productos {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 10px;
+      margin-top: 20px;
+    }
+
+    header img {
+      width: 120px;
+      display: block;
+      margin: 10px auto;
+    }
+
+    /* PARA MARCAR UNA CATEGORÍA COMO FUERA DE STOCK */
+    .sin-stock img {
+      filter: grayscale(100%);
+      opacity: 0.6;
+      pointer-events: none;
+      position: relative;
+    }
+
+    .sin-stock::after {
+      content: "❌ FUERA DE STOCK";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: rgb(255, 0, 0);
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 8px 16px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 10px;
+      text-align: center;
+      z-index: 999;
+    }
+
+    .imagenes-portada {
+      position: relative;
+    }
+
+    .imagenes-portada a {
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="img/logo-dropcraving.png" alt="Logo DropCraving" />
+    <h1>DropCraving</h1>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#contacto">Contacto</a>
+      <a href="ropa.html">Ropa</a>
+      <a href="perfumes.html">Perfumes</a>
+      <a href="aparatos electronicos.html">Electrónica</a>
+      <a href="relojes.html">Relojes</a>
+      <a href="carrito.html" id="icono-carrito">🛒 Carrito</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <section id="inicio">
+      <h2>Bienvenido a DropCraving</h2>
+      <p>Tu tienda de PERFUMES, ROPA, MÓVILES, RELOJES y un montón de cosas más aquí, en tu Tienda de confianza, DROPCRAVING.</p>
+    </section>
+
+    <section class="contenido-principal">
+      <div class="productos-con-titulo">
+        <h2 class="titulo-productos">PRODUCTOS</h2>
+        <div class="imagenes-portada">
+          <a href="perfumes.html"><img src="img/perfumess.jpg" alt="Perfumes"></a>
+          <a href="relojes.html" class="sin-stock"><img src="img/relojess.jpg" alt="Relojes"></a> 
+          <a href="ropa.html" class="sin-stock"><img src="img/ropaa.jpg" alt="Ropa"></a>
+          <a href="aparatos electronicos.html" class="sin-stock"><img src="img/aparatos electronicoss.jpg" alt="Electrónica"></a> 
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <h2>Contacto</h2>
+      <p>¿Tienes dudas sobre cual elegir, precios o alguno fuera de stock? No dudes en <a href="https://wa.me/34686630281" target="_blank">Contactarnos por WhatsApp</a> para que podamos ayudarte.</p>
+    </section>
+
+    <section id="pagos">
+      <h2>Formas de pago</h2>
+      <ul>
+        <li>✅ Bizum</li>
+        <li>✅ PayPal</li>
+        <li>✅ Google Pay</li>
+        <li>✅ eShop</li>
+        <li>✅ Transferencia bancaria</li>
+        <li>✅ Todas las tarjetas (Visa, MasterCard...)</li>
+      </ul>
+      <p>* Los pagos son 100% seguros y cifrados.</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2025 DropCraving. Todos los derechos reservados.</p>
+  </footer>
+
+</body>
+</html>

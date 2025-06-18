@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Aparatos Electrónicos - DropCraving</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .volver-fijo {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background-color: black;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1.1rem;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .volver-fijo:hover {
+      background-color: #333;
+    }
+
+    .sin-stock {
+      filter: grayscale(100%);
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Aparatos Electrónicos - DropCraving</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="carrito.html" id="icono-carrito">🛒 Carrito</a>
+    </nav>
+  </header>
+  <button onclick="history.back()" class="volver-fijo">⬅️ Volver</button>
+  <main>
+    <section class="productos">
+      <a href="producto.html?nombre=Smartphone%20Samsung%20S22&precio=699.99&descripcion=Nuevo%20Samsung%20Galaxy%20S22%20con%20pantalla%20AMOLED%20de%206.1%22.&imagen=img/samsung_s22.jpg&stock=no" class="sin-stock">
+        <img src="img/samsung_s22.jpg" alt="Samsung Galaxy S22">
+        <h4>Aparatos Electrónicos Nueva</h4>
+        <p>599.99€</p>
+      </a>
+    </section>
+  </main>
+</body>
+</html>

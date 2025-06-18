@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Relojes - DropCraving</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .volver-fijo {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background-color: black;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1.1rem;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .volver-fijo:hover {
+      background-color: #333;
+    }
+
+    .productos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+      justify-content: center;
+    }
+
+    .producto-item {
+      width: 200px;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .sin-stock {
+      filter: grayscale(100%);
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Relojes - DropCraving</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="carrito.html" id="icono-carrito">🛒 Carrito</a>
+    </nav>
+  </header>
+
+  <button onclick="history.back()" class="volver-fijo">⬅️ Volver</button>
+
+  <main>
+    <section class="productos">
+      <div class="producto-item sin-stock">
+        <a href="producto.html?nombre=Reloj%20Rolex%20Oyster&precio=399.99&descripcion=Reloj%20de%20lujo%20Rolex%20modelo%20Oyster%20Perpetual.&imagen=img/reloj_rolex.jpg&stock=no">
+          <img src="img/reloj_rolex.jpg" alt="Reloj Rolex Oyster">
+          <h4>Reloj Negro</h4>
+          <p>399.99€</p>
+        </a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

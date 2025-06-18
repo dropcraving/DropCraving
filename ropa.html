@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ropa - DropCraving</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .volver-fijo {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background-color: black;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1.1rem;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .volver-fijo:hover {
+      background-color: #333;
+    }
+
+    .sin-stock {
+      filter: grayscale(100%);
+      opacity: 0.6;
+      pointer-events: auto;
+      position: relative;
+    }
+
+    .sin-stock::after {
+      content: "\274C FUERA DE STOCK";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: red;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 8px 16px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Ropa - DropCraving</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="carrito.html" id="icono-carrito">🛒 Carrito</a>
+    </nav>
+  </header>
+  <button onclick="history.back()" class="volver-fijo">⬅️ Volver</button>
+  <main>
+    <section class="productos">
+      <a href="producto.html?nombre=Camiseta%20Nike%20Blanca&precio=29.99&descripcion=Camiseta%20deportiva%20Nike%20para%20uso%20diario.&imagen=img/camiseta_nike.jpg&stock=no" class="sin-stock">
+        <img src="img/camiseta_nike.jpg" alt="Camiseta Nike Blanca">
+        <h4>Camiseta Nike Blanca</h4>
+        <p>29.99€</p>
+      </a>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Producto - DropCraving</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .volver-fijo {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background-color: black;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1.1rem;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .volver-fijo:hover {
+      background-color: #333;
+    }
+
+    .mensaje-stock {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 30px 50px;
+    border-radius: 15px;
+    font-size: 32px;
+    font-weight: bold;
+    color: rgb(255, 0, 0); 
+    text-align: center;
+    z-index: 9999;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    border: 3px solid rgb(255, 0, 0);
+  }
+
+    .producto-detalle {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .producto-detalle img {
+      width: 300px;
+      height: auto;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .producto-detalle .info {
+      flex: 1;
+    }
+
+    .producto-detalle h2 {
+      margin-top: 0;
+    }
+
+    .producto-detalle .precio {
+      font-size: 1.5rem;
+      color: #28a745;
+      margin: 10px 0;
+    }
+
+    .producto-detalle button {
+      background-color: black;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .producto-detalle button:hover {
+      background-color: #333;
+    }
+
+    .btn-deshabilitado {
+      background-color: #aaa !important;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>DropCraving</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="#pagos">Pagos</a>
+      <a href="carrito.html" id="icono-carrito">🛒 Carrito</a>
+    </nav>
+  </header>
+
+  <button onclick="history.back()" class="volver-fijo">⬅️ Volver</button>
+
+  <main>
+    <section class="producto-detalle">
+      <img id="producto-imagen" src="" alt="Imagen del producto" />
+      <div class="info">
+        <h2 id="producto-nombre">Cargando...</h2>
+        <p class="precio" id="producto-precio">€0.00</p>
+        <p class="descripcion" id="producto-descripcion">...</p>
+        <button id="btn-carrito" onclick="añadirAlCarrito()">Añadir al carrito</button>
+      </div>
+    </section>
+
+    <section id="pagos">
+      <h2>Formas de pago aceptadas</h2>
+      <ul>
+        <li>✅ Bizum</li>
+        <li>✅ PayPal</li>
+        <li>✅ Google Pay</li>
+        <li>✅ eShop</li>
+        <li>✅ Transferencia bancaria</li>
+        <li>✅ Tarjetas (Visa, MasterCard...)</li>
+      </ul>
+    </section>
+
+    <div id="mensaje-stock" class="mensaje-stock">❌ FUERA DE STOCK !!</div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 DropCraving - Todos los derechos reservados</p>
+  </footer>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const nombre = params.get("nombre");
+    const precio = params.get("precio");
+    const descripcion = params.get("descripcion");
+    const imagen = params.get("imagen");
+    const stock = params.get("stock");
+
+    const btnCarrito = document.getElementById("btn-carrito");
+
+    if (nombre && precio && descripcion && imagen) {
+      document.getElementById("producto-nombre").textContent = decodeURIComponent(nombre);
+      document.getElementById("producto-precio").textContent = "€" + parseFloat(precio).toFixed(2);
+      document.getElementById("producto-descripcion").textContent = decodeURIComponent(descripcion);
+      document.getElementById("producto-imagen").src = decodeURIComponent(imagen);
+    } else {
+      document.querySelector(".producto-detalle").innerHTML = "<p>Producto no encontrado.</p>";
+    }
+
+    if (stock === "no") {
+      document.querySelector("main").style.filter = "grayscale(100%)";
+      document.querySelector("main").style.opacity = "0.6";
+      document.getElementById("mensaje-stock").style.display = "block";
+      btnCarrito.textContent = "❌ No disponible";
+      btnCarrito.classList.add("btn-deshabilitado");
+      btnCarrito.disabled = true;
+    }
+
+    function añadirAlCarrito() {
+      const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+      const producto = {
+        nombre: decodeURIComponent(nombre),
+        precio: parseFloat(precio),
+        descripcion: decodeURIComponent(descripcion),
+        imagen: decodeURIComponent(imagen),
+        cantidad: 1,
+        id: Date.now() + Math.random()
+      };
+
+      carrito.push(producto);
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+
+      const carritoIcon = document.getElementById("icono-carrito");
+      carritoIcon.classList.add("carrito-animado");
+      setTimeout(() => carritoIcon.classList.remove("carrito-animado"), 500);
+    }
+  </script>
+</body>
+</html>

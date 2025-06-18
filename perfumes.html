@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Perfumes - DropCraving</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .volver-fijo {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background-color: black;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1.1rem;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .volver-fijo:hover {
+      background-color: #333;
+    }
+
+    .productos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+      justify-content: center;
+    }
+
+    .productos a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      width: 200px;
+      height: 360px;
+      padding: 10px;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .productos img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .productos h4 {
+      margin: 0 0 5px;
+      font-size: 1rem;
+    }
+
+    .productos p {
+      margin: 0;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .sin-stock {
+      filter: grayscale(100%);
+      opacity: 0.6;
+    }
+
+    .sin-stock::after {
+      content: "❌ FUERA DE STOCK";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, 0.9);
+      color: red;
+      font-weight: bold;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Perfumes - DropCraving</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="carrito.html" id="icono-carrito">🛒 Carrito</a>
+    </nav>
+  </header>
+<button onclick="history.back()" class="volver-fijo">⬅️ Volver</button>
+  <main>
+    <section class="productos">
+      <a href="producto.html?nombre=Stronger%20With%20You%20Intensely&precio=89.99&descripcion=Aromático%20intenso%20y%20sensual.%20Ideal%20para%20la%20noche.&imagen=img/stronger_with_you.jpg">
+        <img src="img/stronger_with_you.jpg" alt="Stronger With You Intensely">
+        <h4>Stronger With You Intensely</h4>
+        <p>84.99€</p>
+      </a>
+      <a href="producto.html?nombre=Valentino%20Born%20In%20Roma%20Intense&precio=94.99&descripcion=Perfume%20moderno%20con%20notas%20ahumadas%20y%20dulces.&imagen=img/valentino_roma.jpg">
+        <img src="img/valentino_roma.jpg" alt="Valentino Born In Roma Intense">
+        <h4>Valentino Born In Roma Intense</h4>
+        <p>89.99€</p>
+      </a>
+      <a href="producto.html?nombre=Xerjoff%20Erba%20Pura&precio=149.99&descripcion=Frutal%20exótico%20y%20exclusivo.%20Alta%20gama%20de%20lujo.&imagen=img/xerjoff_erba_pura.jpg">
+        <img src="img/xerjoff_erba_pura.jpg" alt="Xerjoff Erba Pura">
+        <h4>Xerjoff Erba Pura</h4>
+        <p>179.99€</p>
+      </a>
+      <a href="producto.html?nombre=Creed%20Aventus%20Ree&precio=229.99&descripcion=Perfume%20icónico%20y%20potente.%20Ideal%20para%20impactar.&imagen=img/aventus_creed.jpg">
+        <img src="img/aventus_creed.jpg" alt="Creed Aventus Ree">
+        <h4>Creed Aventus Ree</h4>
+        <p>239.99€</p>
+      </a>
+      <a href="producto.html?nombre=Dior%20Sauvage%20EDP&precio=124.99&descripcion=Duradero%20juvenil%20y%20masculino.%20Un%20clásico%20moderno.&imagen=img/sauvage_elixir.jpg">
+        <img src="img/sauvage_edp.jpg" alt="Dior Sauvage EDP">
+        <h4>Dior Sauvage EDP</h4>
+        <p>89.99€</p>
+      </a>
+      <a class="sin-stock" href="producto.html?nombre=Jean%20Paul%20Gaultier%20Le%20Male%20Le%20Parfum&precio=79.99&descripcion=Clásico%20intenso%20y%20duradero.%20Notas%20especiadas.&imagen=img/JPG_le_male.jpg&stock=no">
+        <img src="img/JPG_le_male.jpg" alt="JPG Le Male Le Parfum">
+        <h4>Jean Paul Gaultier Le Male Le Parfum</h4>
+        <p>69.99€</p>
+      </a>
+      <a class="sin-stock" href="producto.html?nombre=Invictus%20Victory%20Elixir&precio=104.99&descripcion=Perfume%20potente%20y%20seductor.%20Ideal%20para%20la%20noche%20y%20ocasiones%20especiales.&imagen=img/invictus_victory.jpg&stock=no">
+        <img src="img/invictus_victory.jpg" alt="Invictus Victory Elixir">
+        <h4>Invictus Victory Elixir</h4>
+        <p>79.99€</p>
+      </a>
+    </section>
+  </main>
+</body>
+</html>

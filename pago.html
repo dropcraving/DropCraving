@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pago - DropCraving</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
+
+    main {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1, h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      margin-top: 15px;
+      display: block;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    .botones-pago {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .boton-pago {
+      flex: 1;
+      background-color: #000;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .boton-pago:hover {
+      background-color: #333;
+    }
+
+    .oculto {
+      display: none;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 12px;
+      background-color: green;
+      color: white;
+      border: none;
+      width: 100%;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .localizador {
+      display: none;
+      margin-top: 30px;
+      border: 2px dashed green;
+      padding: 20px;
+      text-align: center;
+      border-radius: 10px;
+    }
+
+    .barra-envio {
+      display: flex;
+      justify-content: space-between;
+      background: #e0e0e0;
+      border-radius: 10px;
+      margin-top: 20px;
+      padding: 10px;
+    }
+
+    .barra-envio .paso {
+      flex: 1;
+      background: #ccc;
+      padding: 10px;
+      margin: 0 5px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .barra-envio .paso.activo {
+      background: green;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>🛒 Finalizar Compra</h1>
+
+    <form id="formulario-pago">
+      <label for="correo">Correo electrónico:</label>
+      <input type="email" id="correo" name="correo" required placeholder="Te enviaremos tu localizador aquí" />
+
+      <label>Selecciona método de pago:</label>
+      <div class="botones-pago">
+        <div class="boton-pago" onclick="mostrarFormulario('paypal')">PayPal</div>
+        <div class="boton-pago" onclick="mostrarFormulario('tarjeta')">Tarjeta</div>
+        <div class="boton-pago" onclick="mostrarFormulario('bizum')">Bizum</div>
+        <div class="boton-pago" onclick="mostrarFormulario('transferencia')">Transferencia</div>
+        <div class="boton-pago" onclick="mostrarFormulario('googlepay')">Google Pay</div>
+      </div>
+
+      <div id="form-paypal" class="oculto">
+        <label>Email PayPal:</label>
+        <input type="email" name="paypal-email" required />
+        <label>Contraseña:</label>
+        <input type="password" name="paypal-password" required />
+      </div>
+
+      <div id="form-tarjeta" class="oculto">
+        <label>Número de tarjeta:</label>
+        <input type="text" name="tarjeta-numero" maxlength="16" required />
+        <label>Fecha expiración (MM/AA):</label>
+        <input type="text" name="tarjeta-exp" maxlength="5" required />
+        <label>CVV:</label>
+        <input type="text" name="tarjeta-cvv" maxlength="3" required />
+      </div>
+
+      <div id="form-bizum" class="oculto">
+        <label>Número de teléfono:</label>
+        <input type="tel" name="bizum-tlf" maxlength="9" required />
+      </div>
+
+      <div id="form-transferencia" class="oculto">
+        <label>Nombre titular:</label>
+        <input type="text" name="titular" required />
+        <label>Número de cuenta IBAN:</label>
+        <input type="text" name="iban" required />
+      </div>
+
+      <div id="form-googlepay" class="oculto">
+        <label>Correo de cuenta Google:</label>
+        <input type="email" name="googlepay-email" required />
+      </div>
+
+      <h3>Dirección de envío</h3>
+      <label for="direccion">Dirección:</label>
+      <input type="text" id="direccion" name="direccion" required />
+
+      <label for="ciudad">Ciudad:</label>
+      <input type="text" id="ciudad" name="ciudad" required />
+
+      <label for="cp">Código Postal:</label>
+      <input type="text" id="cp" name="cp" required />
+
+      <label for="pais">País:</label>
+      <select id="pais" name="pais" required></select>
+
+      <button type="submit">Finalizar compra</button>
+    </form>
+
+    <div id="localizador" class="localizador"></div>
+  </main>
+
+  <script>
+    const paises = ["España", "Argentina", "Colombia", "México", "Chile", "Perú", "Ecuador", "Estados Unidos", "Francia", "Italia", "Alemania"];
+    const selectPais = document.getElementById("pais");
+    paises.forEach(pais => {
+      const opt = document.createElement("option");
+      opt.value = pais;
+      opt.textContent = pais;
+      selectPais.appendChild(opt);
+    });
+
+    function mostrarFormulario(metodo) {
+      document.querySelectorAll(".oculto").forEach(f => f.style.display = "none");
+      document.getElementById(`form-${metodo}`).style.display = "block";
+
+      document.querySelectorAll('#form-paypal input, #form-tarjeta input, #form-bizum input, #form-transferencia input, #form-googlepay input')
+        .forEach(input => input.required = false);
+
+      document.querySelectorAll(`#form-${metodo} input`).forEach(input => input.required = true);
+    }
+
+    document.getElementById("formulario-pago").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const localizador = "DROP-" + new Date().toISOString().slice(0,10).replace(/-/g, '') + '-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+      const div = document.getElementById("localizador");
+
+      div.style.display = "block";
+      div.innerHTML = `
+        <h2>✅ ¡Pedido confirmado!</h2>
+        <p>Tu localizador es: <strong>${localizador}</strong></p>
+        <p>Te llegará un correo con los detalles de tu pedido y número de seguimiento.</p>
+        <div class="barra-envio">
+          <div class="paso activo">Procesando</div>
+          <div class="paso">En almacén</div>
+          <div class="paso">En camino</div>
+          <div class="paso">Entregado</div>
+        </div>
+        <br>
+        <button onclick="window.print()">🖨️ Imprimir</button>
+      `;
+
+      this.style.display = "none";
+    });
+  </script>
+</body>
+</html>
